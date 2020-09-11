@@ -13,9 +13,14 @@ import SceneKit
 
 class GameView: SCNView {
     
+    private var skScene: SKScene!
+    private let overlayNode = SKNode()
+    
     //    MARK:- lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        setup2DOverlay()
         
     }
     
@@ -26,6 +31,27 @@ class GameView: SCNView {
     
     deinit {
         
+    }
+    
+//    MARK:- overlay functions
+    private func setup2DOverlay() {
+        
+        let w = bounds.size.width
+        let h = bounds.size.width
+        
+        skScene = SKScene(size: CGSize(width: w, height: h))
+        skScene.scaleMode = .resizeFill
+        
+        skScene.addChild(overlayNode)
+        overlayNode.position = CGPoint(x: 0.0, y:h)
+        
+        overlaySKScene = skScene
+        skScene.isUserInteractionEnabled = true
+    }
+    
+    
+    private func layout2DOverlay() {
+        overlayNode.position = CGPoint(x: 0.0, y: bounds.size.height)
     }
     
     
