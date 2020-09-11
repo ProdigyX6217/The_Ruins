@@ -16,6 +16,7 @@ class GameView: SCNView {
     private var skScene: SKScene!
     private let overlayNode = SKNode()
     private var dpadSprite:SKSpriteNode!
+    private var attackButtonSprite:SKSpriteNode!
     
     //    MARK:- lifecycle
     override func awakeFromNib() {
@@ -68,7 +69,6 @@ class GameView: SCNView {
         scene.addChild(dpadSprite)
     }
     
-    
     func virtualDPadBounds() -> CGRect {
         
         var virtualDPadBounds = CGRect(x: 10.0, y: 10.0, width: 150.0, height:  150.0)
@@ -80,8 +80,29 @@ class GameView: SCNView {
     
     
 //    MARK:- attack button
+    private func setupAttackButton(with scene:SKScene) {
+        
+        attackButtonSprite = SKSpriteNode(imageNamed: "art.scnassets/Assets/attack1.png")
+        attackButtonSprite.position = CGPoint(x: bounds.size.height-110.0, y: 50)
+        attackButtonSprite.xScale = 1.0
+        attackButtonSprite.yScale = 1.0
+        attackButtonSprite.size = CGSize(width: 60.0, height: 60.0)
+        attackButtonSprite.anchorPoint = CGPoint(x: 0.0, y: 0.0)
+        attackButtonSprite.name = "attackButton"
+        scene.addChild(attackButtonSprite)
+    }
+    
+    func virtualAttackButtonBounds() -> CGRect {
+           
+        var virtualAttackButtonBounds = CGRect(x: bounds.width-110, y: 50, width: 60.0, height:  60.0)
+           
+           virtualAttackButtonBounds.origin.y = bounds.size.height - virtualAttackButtonBounds.size.height - virtualAttackButtonBounds.origin.y
+           
+           return virtualAttackButtonBounds
+       }
+    
 
     
-    
+
 
 }
