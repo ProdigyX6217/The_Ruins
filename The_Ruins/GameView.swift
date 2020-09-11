@@ -15,18 +15,17 @@ class GameView: SCNView {
     
     private var skScene: SKScene!
     private let overlayNode = SKNode()
+    private var dpadSprite:SKSpriteNode!
     
     //    MARK:- lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         
         setup2DOverlay()
-        
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
     }
     
     deinit {
@@ -45,6 +44,8 @@ class GameView: SCNView {
         skScene.addChild(overlayNode)
         overlayNode.position = CGPoint(x: 0.0, y:h)
         
+        setupDpad(with: skScene)
+        
         overlaySKScene = skScene
         skScene.isUserInteractionEnabled = true
     }
@@ -55,12 +56,32 @@ class GameView: SCNView {
     }
     
     
-//    MARK:- internal functions
-    
 //    MARK:- D-Pad
+    private func setupDpad(with scene:SKScene) {
+        
+        dpadSprite = SKSpriteNode(imageNamed: "art.scnassets/Assets/dpad.png")
+        dpadSprite.position = CGPoint(x: 10.0, y: 10.0)
+        dpadSprite.xScale = 1.0
+        dpadSprite.yScale = 1.0
+        dpadSprite.anchorPoint = CGPoint(x: 0.0, y: 0.0)
+        dpadSprite.size = CGSize(width: 150.0, height: 150.0)
+        scene.addChild(dpadSprite)
+    }
+    
+    
+    func virtualDPadBounds() -> CGRect {
+        
+        var virtualDPadBounds = CGRect(x: 10.0, y: 10.0, width: 150.0, height:  150.0)
+        
+        virtualDPadBounds.origin.y = bounds.size.height - virtualDPadBounds.size.height + virtualDPadBounds.origin.y
+        
+        return virtualDPadBounds
+    }
+    
     
 //    MARK:- attack button
 
     
     
+
 }
