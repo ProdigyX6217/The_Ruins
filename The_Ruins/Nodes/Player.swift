@@ -49,6 +49,7 @@ class Player:SCNNode {
         for child in playerScene.rootNode.childNodes {
             daeHolderNode.addChildNode(child)
         }
+        
         addChildNode(daeHolderNode)
         
         //set mesh name
@@ -64,7 +65,6 @@ class Player:SCNNode {
         loadAnimation(animationType: .attack1, inSceneNamed: "art.scnassets/Scenes/Hero/attack", withIdentfier: "attackID")
 
         loadAnimation(animationType: .dead, inSceneNamed: "art.scnassets/Scenes/Hero/die", withIdentfier: "DeathID")
-
     }
     
     
